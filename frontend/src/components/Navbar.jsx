@@ -1,3 +1,5 @@
+
+
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
@@ -11,12 +13,14 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="navbar">
-      <Link to="/" className="brand">
-        CivicFix
+    <nav className="navbar professional-navbar">
+      <Link to="/" className="brand professional-brand">
+        Public Complaint
       </Link>
-      <div className="nav-links">
+
+      <div className="nav-links professional-nav-links">
         <Link to="/complaints">Browse</Link>
+
         {user && user.role === "citizen" && (
           <>
             <Link to="/dashboard">Dashboard</Link>
@@ -24,13 +28,18 @@ export default function Navbar() {
             <Link to="/complaints/mine">My Complaints</Link>
           </>
         )}
-        {user && user.role === "officer" && <Link to="/officer/dashboard">Officer Dashboard</Link>}
+
+        {user && user.role === "officer" && (
+          <Link to="/officer/dashboard">Officer Dashboard</Link>
+        )}
+
         {!user && (
           <>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
           </>
         )}
+
         {user && (
           <button onClick={handleLogout} className="link-btn">
             Logout ({user.name})
@@ -40,3 +49,4 @@ export default function Navbar() {
     </nav>
   );
 }
+
